@@ -54,8 +54,8 @@ export default function App() {
           />
         </InputContainer>
         <SubmitContainer>
-          <button>Confirm Payment</button>
-          <span>You verify that this info is correct</span>
+          <SubmitButton>Confirm Payment</SubmitButton>
+          <Message>You verify that this info is correct</Message>
         </SubmitContainer>
       </Form>
     </CardMain>
@@ -79,12 +79,28 @@ const Form = styled.form`
   position: relative;
   background: #ffffff;
   border-radius: 8px;
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
 `;
 
 const InputContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  & input {
+    height: 40px;
+    border: 1px solid #a7bac5;
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  & input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
+  }
 `;
 
 const ExpirationCvv = styled.div`
@@ -98,4 +114,27 @@ const ExpirationCvv = styled.div`
 const SubmitContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 5px;
+`;
+
+const SubmitButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 8px;
+  background: #6e41e2;
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+`;
+
+const Message = styled.span`
+  font-weight: 300;
+  font-size: 12px;
+  color: #5f6974;
+  text-align: center;
 `;
