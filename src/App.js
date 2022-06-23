@@ -1,28 +1,60 @@
 import "./App.css";
-
+import { useState } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 
 import styled from "styled-components";
 
 export default function App() {
+  const [personaldata, setPersonalData] = useState({
+    name: "Name",
+    number: "9999999999999999",
+    expiry: "2010",
+    cvc: "123",
+    focus: "name",
+  });
+
+  const changeData = (e) => {
+    const value = e.target.value;
+    setPersonalData({
+      ...personaldata,
+      [e.target.name]: value,
+    });
+  };
+
+  const changeFocus = (e) => {
+    const inputFocus = e.target.name;
+    setPersonalData({
+      ...personaldata,
+      focus: inputFocus,
+    });
+  };
   return (
     <CardMain>
       <Cards
-        number={"1234123412341234"}
-        name={"name"}
-        expiry={"2010"}
-        cvc={"123"}
-        focus={"name"}
+        number={personaldata.number}
+        name={personaldata.name}
+        expiry={personaldata.expiry}
+        cvc={personaldata.cvc}
+        focused={personaldata.focus}
       />
       <Form>
         <InputContainer>
           <label>Full Name</label>
-          <input type="text" name="name" id="name" placeholder="Your name" />
+          <input
+            onChange={(e) => changeData(e)}
+            onFocus={(e) => changeFocus(e)}
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Your name"
+          />
         </InputContainer>
         <InputContainer>
           <label>Card Number</label>
           <input
+            onChange={(e) => changeData(e)}
+            onFocus={(e) => changeFocus(e)}
             type="number"
             name="number"
             id="number"
@@ -33,6 +65,8 @@ export default function App() {
           <InputContainer>
             <label>Expiration</label>
             <input
+              onChange={(e) => changeData(e)}
+              onFocus={(e) => changeFocus(e)}
               type="number"
               name="expiry"
               id="expiry"
@@ -41,7 +75,14 @@ export default function App() {
           </InputContainer>
           <InputContainer>
             <label>CVV</label>
-            <input type="password" name="cvc" id="cvc" placeholder="***" />
+            <input
+              onChange={(e) => changeData(e)}
+              onFocus={(e) => changeFocus(e)}
+              type="password"
+              name="cvc"
+              id="cvc"
+              placeholder="***"
+            />
           </InputContainer>
         </ExpirationCvv>
         <InputContainer>
@@ -130,6 +171,7 @@ const SubmitButton = styled.button`
   border: none;
   font-weight: 500;
   font-size: 14px;
+  cursor: pointer;
 `;
 
 const Message = styled.span`
